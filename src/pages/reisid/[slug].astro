@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TripDetail from '../../components/TripDetail.astro';
+import { trips } from '../../data/trips';
+import { t } from '../../i18n/ui';
+
+export async function getStaticPaths() {
+  return trips.map((trip) => ({
+    params: { slug: trip.slug },
+    props: { trip },
+  }));
+}
+
+const { trip } = Astro.props;
+const lang = 'et';
+const s = t(lang);
+const title = `${trip.name[lang]} ${trip.year} · ${s.siteTitle}`;
+const altHref = `/en/reisid/${trip.slug}/`;
+---
+
+<Layout title={title} description={trip.summary[lang]} lang={lang}>
+  <TripDetail trip={trip} lang={lang} altHref={altHref} />
+</Layout>

@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import TripMap from '../../components/TripMap.astro';
+import Riders from '../../components/Riders.astro';
+import Bikes from '../../components/Bikes.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'en';
+const altHref = '/';
+---
+
+<Layout lang={lang}>
+  <Hero lang={lang} altHref={altHref} />
+  <About lang={lang} />
+  <TripMap lang={lang} />
+  <Riders lang={lang} />
+  <Bikes lang={lang} />
+  <Footer lang={lang} />
+</Layout>

@@ -1,0 +1,299 @@
+---
+import { trips } from '../data/trips';
+import { t, localizedPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t(lang);
+
+const tripLinks: Record<string, string> = {
+  'nordkapp-2025': '/reisid/nordkapp-2025/',
+};
+
+const mapTrips = trips.map((trip) => ({
+  year: trip.year,
+  name: trip.name[lang],
+  status: trip.status,
+  color: trip.color,
+  dashArray: trip.dashArray,
+  waypoints: trip.waypoints,
+  href: tripLinks[trip.slug] ? localizedPath(lang, tripLinks[trip.slug]) : null,
+  tooltipOpen: s.tripMap.tooltipOpen,
+}));
+
+const markers = trips.flatMap((trip) =>
+  trip.pinned
+    .filter((p) => p.emphasis)
+    .map((p) => ({ name: p.name[lang], lat: p.lat, lon: p.lon, color: trip.color }))
+);
+
+const tripsJson = JSON.stringify(mapTrips);
+const markersJson = JSON.stringify(markers);
+
+const nordkapp = trips.find((t) => t.slug === 'nordkapp-2025')!;
+const dolomites = trips.find((t) => t.slug === 'dolomiidid-2026')!;
+---
+
+<section id="reis" class="trip-map">
+  <div class="container">
+    <h2 class="section-title">{s.tripMap.title}</h2>
+    <p class="subtitle">{s.tripMap.subtitle}</p>
+
+    <div id="paatna-map" class="map" data-trips={tripsJson} data-markers={markersJson} aria-label={s.tripMap.title}></div>
+
+    <ul class="legend">
+      <li>
+        <span class="swatch done"></span>
+        <span><strong>{nordkapp.year}</strong> {nordkapp.name[lang]} · {s.tripMap.legendDone}</span>
+      </li>
+      <li>
+        <span class="swatch planned"></span>
+        <span><strong>{dolomites.year}</strong> {dolomites.name[lang]} · {s.tripMap.legendPlanned}</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  type Trip = {
+    year: number;
+    name: string;
+    status: 'done' | 'planned';
+    color: string;
+    dashArray?: string;
+    waypoints: [number, number][];
+    href: string | null;
+    tooltipOpen: string;
+  };
+
+  type Marker = {
+    name: string;
+    lat: number;
+    lon: number;
+    color: string;
+    emphasis?: boolean;
+  };
+
+  function initMap() {
+    const el = document.getElementById('paatna-map') as HTMLElement | null;
+    if (!el || el.dataset.initialized) return;
+    el.dataset.initialized = 'true';
+
+    const trips: Trip[] = JSON.parse(el.dataset.trips ?? '[]');
+    const markers: Marker[] = JSON.parse(el.dataset.markers ?? '[]');
+
+    const map = L.map(el, {
+      zoomControl: true,
+      scrollWheelZoom: false,
+      attributionControl: true,
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 10,
+      minZoom: 3,
+    }).addTo(map);
+
+    const allBounds = L.latLngBounds([]);
+
+    trips.forEach((trip) => {
+      const line = L.polyline(trip.waypoints, {
+        color: trip.color,
+        weight: trip.status === 'done' ? 3.5 : 2.5,
+        opacity: trip.status === 'done' ? 1 : 0.9,
+        dashArray: trip.dashArray,
+        lineCap: 'round',
+        lineJoin: 'round',
+        className: trip.href ? 'paatna-route-link' : '',
+      }).addTo(map);
+      const tipText = trip.href
+        ? `${trip.year} · ${trip.name} · ${trip.tooltipOpen} →`
+        : `${trip.year} · ${trip.name}`;
+      line.bindTooltip(tipText, { sticky: true });
+      if (trip.href) {
+        line.on('click', () => {
+          window.location.href = trip.href!;
+        });
+      }
+    });
+
+    trips.forEach((t) => t.waypoints.forEach((w) => allBounds.extend(w)));
+
+    markers.forEach((m) => {
+      const icon = L.divIcon({
+        className: 'paatna-marker',
+        html: `
+          <div class="dot" style="background:${m.color}"></div>
+          <div class="ring" style="border-color:${m.color}"></div>
+          <div class="label">${m.name}</div>
+        `,
+        iconSize: [12, 12],
+        iconAnchor: [6, 6],
+      });
+      L.marker([m.lat, m.lon], { icon }).addTo(map);
+    });
+
+    map.fitBounds(allBounds, { padding: [30, 30] });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
+</script>
+
+<style is:global>
+  .paatna-marker {
+    position: relative;
+  }
+  .paatna-marker .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 0 2px #0a0a0a;
+  }
+  .paatna-marker .ring {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    opacity: 0.5;
+  }
+  .paatna-marker .label {
+    position: absolute;
+    left: 18px;
+    top: -2px;
+    color: #f5f5f5;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-shadow: 0 0 6px #000, 0 0 6px #000, 0 0 6px #000;
+    pointer-events: none;
+  }
+  .leaflet-container {
+    background: #0a0a0a;
+    font-family: 'Inter', sans-serif;
+  }
+  .leaflet-control-attribution {
+    background: rgba(10, 10, 10, 0.75) !important;
+    color: #6a6a6a !important;
+    font-size: 10px !important;
+  }
+  .leaflet-control-attribution a {
+    color: #9a9a9a !important;
+  }
+  .leaflet-bar a {
+    background: #141414 !important;
+    color: #f5f5f5 !important;
+    border-color: #2a2a2a !important;
+  }
+  .leaflet-bar a:hover {
+    background: #1c1c1c !important;
+  }
+  .leaflet-tooltip {
+    background: #141414 !important;
+    color: #f5f5f5 !important;
+    border: 1px solid #2a2a2a !important;
+    box-shadow: none !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+  }
+  .leaflet-tooltip-top:before,
+  .leaflet-tooltip-bottom:before,
+  .leaflet-tooltip-left:before,
+  .leaflet-tooltip-right:before {
+    border-top-color: #2a2a2a !important;
+  }
+  .paatna-route-link {
+    cursor: pointer;
+  }
+</style>
+
+<style>
+  .trip-map {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 6rem 0;
+  }
+
+  .section-title {
+    text-transform: none;
+    font-weight: 700;
+    letter-spacing: 0;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    max-width: 640px;
+  }
+
+  .map {
+    width: 100%;
+    height: 600px;
+    border: 1px solid var(--border);
+    background: #0a0a0a;
+  }
+
+  @media (max-width: 700px) {
+    .map {
+      height: 480px;
+    }
+  }
+
+  .legend {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .legend strong {
+    color: var(--fg);
+    margin-right: 0.35rem;
+  }
+
+  .swatch {
+    display: inline-block;
+    width: 28px;
+    height: 3px;
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+
+  .swatch.done {
+    background: var(--accent);
+  }
+
+  .swatch.planned {
+    background: repeating-linear-gradient(to right, #f5f5f5 0 6px, transparent 6px 14px);
+  }
+</style>

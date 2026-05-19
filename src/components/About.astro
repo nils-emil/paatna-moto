@@ -1,0 +1,154 @@
+---
+import { trips } from '../data/trips';
+import { t, localizedPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t(lang);
+
+const linkable: Record<string, string> = {
+  'nordkapp-2025': '/reisid/nordkapp-2025/',
+};
+---
+
+<section id="klubi" class="about">
+  <div class="container">
+    <h2 class="section-title">{s.about.title}</h2>
+
+    <div class="grid">
+      <div class="copy">
+        <p>{s.about.body}</p>
+      </div>
+
+      <div class="trips">
+        {trips.map((trip) => {
+          const rawHref = linkable[trip.slug];
+          const href = rawHref ? localizedPath(lang, rawHref) : undefined;
+          const inner = (
+            <>
+              <span class="year">{trip.year}</span>
+              <span class="place">
+                {trip.name[lang]}
+                {href && <span class="arrow">→</span>}
+              </span>
+              <span class={`status status-${trip.status === 'done' ? 'done' : 'next'}`}>
+                {trip.status === 'done' ? s.about.statusDone : s.about.statusNext}
+              </span>
+            </>
+          );
+          return href
+            ? <a class="trip trip-link" href={href}>{inner}</a>
+            : <div class="trip">{inner}</div>;
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--bg);
+  }
+
+  .section-title {
+    text-transform: none;
+    font-weight: 700;
+    letter-spacing: 0;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: 2.5rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .copy p {
+    color: var(--fg);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .trips {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+  }
+
+  .trip {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease;
+  }
+
+  .trip:last-child {
+    border-bottom: none;
+  }
+
+  .trip-link:hover {
+    background: var(--bg-elev);
+  }
+
+  .trip-link:hover .place {
+    color: var(--accent);
+  }
+
+  .arrow {
+    color: var(--accent);
+    margin-left: 0.5rem;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .trip-link:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  .year {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--fg);
+  }
+
+  .place {
+    color: var(--fg);
+    font-size: 1.05rem;
+  }
+
+  .status {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border);
+  }
+
+  .status-done {
+    color: var(--muted);
+  }
+
+  .status-next {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 800px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

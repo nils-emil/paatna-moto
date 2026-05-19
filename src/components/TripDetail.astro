@@ -1,0 +1,466 @@
+---
+import { t, localizedPath, type Lang } from '../i18n/ui';
+import LangToggle from './LangToggle.astro';
+import type { Trip } from '../data/trips';
+
+interface Props {
+  trip: Trip;
+  lang: Lang;
+  altHref: string;
+}
+
+const { trip, lang, altHref } = Astro.props;
+const s = t(lang);
+const dayLabel = s.trip.dayLabel;
+---
+
+<header class="hero" style={trip.hero ? `background-image: url('${trip.hero}')` : ''}>
+  <div class="hero-overlay">
+    <div class="container">
+      <div class="top-bar">
+        <a href={localizedPath(lang, '/')} class="back">{s.common.back}</a>
+        <LangToggle lang={lang} altHref={altHref} />
+      </div>
+      <p class="year">{trip.year}</p>
+      <h1>{trip.name[lang]}</h1>
+      <p class="summary">{trip.summary[lang]}</p>
+    </div>
+  </div>
+</header>
+
+<section class="stats-section">
+  <div class="container">
+    <dl class="stats">
+      {trip.stats.map((stat) => (
+        <div>
+          <dt>{stat.label[lang]}</dt>
+          <dd>{stat.value[lang]}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<main class="container blog">
+  {trip.days.length === 0 ? (
+    <p class="placeholder">{s.trip.noDiary}</p>
+  ) : (
+    <ol class="days">
+      {trip.days.map((day) => (
+        <li class="day">
+          <div class="day-meta">
+            <span class="day-num">{dayLabel} {day.number}</span>
+            {day.route && <span class="day-route">{day.route[lang]}</span>}
+            {day.distanceKm && <span class="day-km">{day.distanceKm} km</span>}
+          </div>
+          <h2>{day.title[lang]}</h2>
+          <div class="day-body">
+            {day.paragraphs.map((p) => (
+              <p>{p[lang]}</p>
+            ))}
+          </div>
+          {day.images.length > 0 && (
+            <div class={`gallery gallery-${Math.min(day.images.length, 4)}`} data-gallery>
+              {day.images.map((src) => (
+                <button type="button" class="photo" data-lightbox={src} aria-label={`${dayLabel} ${day.number}`}>
+                  <img src={src} alt={`${dayLabel} ${day.number}`} loading="lazy" decoding="async" />
+                </button>
+              ))}
+            </div>
+          )}
+        </li>
+      ))}
+    </ol>
+  )}
+
+  {trip.days.length > 0 && <p class="end-note">{s.trip.endNote}</p>}
+</main>
+
+<div id="lightbox" class="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true">
+  <button type="button" class="lb-btn lb-prev" aria-label="Previous">‹</button>
+  <button type="button" class="lb-btn lb-next" aria-label="Next">›</button>
+  <button type="button" class="lb-btn lb-close" aria-label="Close">×</button>
+  <img class="lb-img" alt="" />
+</div>
+
+<script>
+  type State = { images: string[]; index: number } | null;
+  let state: State = null;
+
+  function $(sel: string) {
+    return document.querySelector(sel) as HTMLElement | null;
+  }
+
+  function open(images: string[], index: number) {
+    const box = $('#lightbox');
+    const img = box?.querySelector('.lb-img') as HTMLImageElement | null;
+    if (!box || !img) return;
+    state = { images, index };
+    img.src = images[index];
+    box.hidden = false;
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    updateNav();
+  }
+
+  function close() {
+    const box = $('#lightbox');
+    if (!box) return;
+    box.hidden = true;
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    state = null;
+  }
+
+  function step(delta: number) {
+    if (!state) return;
+    const next = state.index + delta;
+    if (next < 0 || next >= state.images.length) return;
+    state.index = next;
+    const img = document.querySelector('.lb-img') as HTMLImageElement | null;
+    if (img) img.src = state.images[next];
+    updateNav();
+  }
+
+  function updateNav() {
+    const prev = document.querySelector('.lb-prev') as HTMLElement | null;
+    const next = document.querySelector('.lb-next') as HTMLElement | null;
+    if (!state || !prev || !next) return;
+    prev.style.visibility = state.index === 0 ? 'hidden' : 'visible';
+    next.style.visibility = state.index === state.images.length - 1 ? 'hidden' : 'visible';
+  }
+
+  document.querySelectorAll('[data-gallery]').forEach((gallery) => {
+    const buttons = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-lightbox]'));
+    const images = buttons.map((b) => b.dataset.lightbox!).filter(Boolean);
+    buttons.forEach((btn, i) => {
+      btn.addEventListener('click', () => open(images, i));
+    });
+  });
+
+  const box = $('#lightbox');
+  box?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target === box || target.classList.contains('lb-close')) close();
+    if (target.classList.contains('lb-prev')) step(-1);
+    if (target.classList.contains('lb-next')) step(1);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!state) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+</script>
+
+<style>
+  .hero {
+    min-height: 70vh;
+    background-size: cover;
+    background-position: center;
+    background-color: #0a0a0a;
+    display: flex;
+    align-items: flex-end;
+    color: var(--fg);
+    position: relative;
+  }
+
+  .hero-overlay {
+    width: 100%;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.92) 100%);
+    padding: 8rem 0 3rem;
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fg);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.55rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .back:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .year {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    margin-bottom: 1.25rem;
+    color: var(--fg);
+  }
+
+  .summary {
+    color: var(--fg);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  .stats-section {
+    background: var(--bg-elev);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 0;
+  }
+
+  .stats {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem 3rem;
+  }
+
+  .stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stats dt {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stats dd {
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--fg);
+  }
+
+  .blog {
+    padding: 4rem 1.5rem 6rem;
+    max-width: 880px;
+  }
+
+  .days {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .day {
+    border-top: 1px solid var(--border);
+    padding-top: 2.5rem;
+  }
+
+  .day:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .day-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .day-num {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .day-route {
+    color: var(--muted);
+  }
+
+  .day-km {
+    color: var(--fg);
+    font-weight: 700;
+  }
+
+  .day h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 1.25rem;
+    color: var(--fg);
+  }
+
+  .day-body p {
+    color: var(--fg);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .gallery {
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .gallery-1 { grid-template-columns: 1fr; }
+  .gallery-2 { grid-template-columns: 1fr 1fr; }
+  .gallery-3 { grid-template-columns: 1fr 1fr; }
+  .gallery-3 .photo:first-child { grid-column: 1 / -1; }
+  .gallery-4 { grid-template-columns: 1fr 1fr; }
+
+  @media (max-width: 520px) {
+    .gallery-2,
+    .gallery-3,
+    .gallery-4 { grid-template-columns: 1fr; }
+    .gallery-3 .photo:first-child { grid-column: auto; }
+  }
+
+  .photo {
+    display: block;
+    overflow: hidden;
+    background: var(--bg-elev);
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s ease;
+    padding: 0;
+    cursor: zoom-in;
+    width: 100%;
+  }
+
+  .photo:hover {
+    border-color: var(--accent);
+  }
+
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .photo:hover img {
+    transform: scale(1.04);
+  }
+
+  .placeholder {
+    color: var(--muted);
+    font-style: italic;
+    padding: 2rem 0;
+  }
+
+  .end-note {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    text-align: center;
+    font-style: italic;
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 5, 0.94);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    cursor: zoom-out;
+  }
+
+  .lightbox[hidden] {
+    display: none;
+  }
+
+  .lb-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: default;
+    box-shadow: 0 12px 60px rgba(0, 0, 0, 0.6);
+  }
+
+  .lb-btn {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--fg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 2rem;
+    line-height: 1;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+
+  .lb-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .lb-close {
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.75rem;
+  }
+
+  .lb-prev {
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .lb-next {
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 520px) {
+    .lightbox {
+      padding: 1rem;
+    }
+    .lb-prev { left: 0.5rem; }
+    .lb-next { right: 0.5rem; }
+    .lb-close { top: 0.5rem; right: 0.5rem; }
+  }
+</style>

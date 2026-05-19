@@ -1,0 +1,205 @@
+---
+import { t, localizedPath, type Lang } from '../i18n/ui';
+import LangToggle from './LangToggle.astro';
+import { pick, type Rider } from '../data/riders';
+
+interface Props {
+  rider: Rider;
+  lang: Lang;
+  altHref: string;
+}
+
+const { rider, lang, altHref } = Astro.props;
+const s = t(lang);
+const { bike } = rider;
+const bikeOf = s.riders.bikeOf(rider.name);
+const ridingText = pick(bike.riding, lang);
+const luggageText = pick(bike.luggage, lang);
+const typeText = pick(bike.type, lang);
+const engineText = pick(bike.engine, lang);
+---
+
+<header class="page-header">
+  <div class="container">
+    <div class="top-bar">
+      <a href={localizedPath(lang, '/')} class="back">{s.common.back}</a>
+      <LangToggle lang={lang} altHref={altHref} />
+    </div>
+    <p class="kicker">{bikeOf}</p>
+    <h1>
+      <span class="make">{bike.make}</span>
+      <span class="model">{bike.model}</span>
+    </h1>
+    {(typeText || engineText) && (
+      <dl class="meta">
+        {typeText && (
+          <div>
+            <dt>{s.bikePage.metaType}</dt>
+            <dd>{typeText}</dd>
+          </div>
+        )}
+        {engineText && (
+          <div>
+            <dt>{s.bikePage.metaEngine}</dt>
+            <dd>{engineText}</dd>
+          </div>
+        )}
+        <div>
+          <dt>{s.bikePage.metaRider}</dt>
+          <dd>{rider.name}</dd>
+        </div>
+      </dl>
+    )}
+  </div>
+</header>
+
+<main class="container body">
+  <section class="block">
+    <h2>{s.bikePage.ridingHeading}</h2>
+    {ridingText
+      ? <p>{ridingText}</p>
+      : <p class="placeholder">{s.bikePage.ridingPlaceholder}</p>}
+  </section>
+
+  <section class="block">
+    <h2>{s.bikePage.luggageHeading}</h2>
+    {luggageText
+      ? <p>{luggageText}</p>
+      : <p class="placeholder">{s.bikePage.luggagePlaceholder}</p>}
+  </section>
+</main>
+
+<style>
+  .page-header {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255, 77, 0, 0.12), transparent 60%),
+      var(--bg);
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    color: var(--fg);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .back:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .kicker {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    line-height: 0.95;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 .make {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 .model {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 900;
+    color: var(--fg);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin: 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .meta div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .meta dt {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta dd {
+    margin: 0;
+    color: var(--fg);
+    font-size: 1rem;
+  }
+
+  .body {
+    padding: 4rem 1.5rem 6rem;
+  }
+
+  .block {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+    max-width: 720px;
+  }
+
+  .block:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  .block h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 1rem;
+    color: var(--fg);
+  }
+
+  .block p {
+    color: var(--fg);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .placeholder {
+    color: var(--muted);
+    font-style: italic;
+  }
+</style>

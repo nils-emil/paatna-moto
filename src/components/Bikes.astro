@@ -1,0 +1,136 @@
+---
+import { riders, pick } from '../data/riders';
+import { t, localizedPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t(lang);
+---
+
+<section id="masinad" class="bikes">
+  <div class="container">
+    <h2 class="section-title">{s.bikes.title}</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>{s.bikes.thRider}</th>
+          <th>{s.bikes.thBike}</th>
+          <th>{s.bikes.thType}</th>
+          <th>{s.bikes.thEngine}</th>
+          <th aria-label={s.bikes.thOpen}></th>
+        </tr>
+      </thead>
+      <tbody>
+        {riders.map((rider) => {
+          const href = localizedPath(lang, `/masinad/${rider.bike.slug}/`);
+          return (
+            <tr onclick={`window.location='${href}'`}>
+              <td>{rider.name}</td>
+              <td>
+                <a href={href}>
+                  {rider.bike.make} {rider.bike.model}
+                </a>
+              </td>
+              <td>{pick(rider.bike.type, lang) ?? ''}</td>
+              <td>{pick(rider.bike.engine, lang) ?? ''}</td>
+              <td class="arrow">→</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .bikes {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .section-title {
+    text-transform: none;
+    font-weight: 700;
+    letter-spacing: 0;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: 2.5rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+  }
+
+  th, td {
+    text-align: left;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  th {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--bg-elev);
+  }
+
+  tbody tr {
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  tbody tr:hover {
+    background: var(--bg-elev);
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  td {
+    color: var(--fg);
+  }
+
+  td:nth-child(3), td:nth-child(4) {
+    color: var(--muted);
+  }
+
+  td a {
+    color: var(--fg);
+    border-bottom: 1px solid transparent;
+  }
+
+  tbody tr:hover td a {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .arrow {
+    color: var(--accent);
+    text-align: right;
+    width: 2rem;
+    transition: transform 0.15s ease;
+  }
+
+  tbody tr:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 640px) {
+    th:nth-child(3), td:nth-child(3) {
+      display: none;
+    }
+    th, td {
+      padding: 0.75rem 0.85rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>

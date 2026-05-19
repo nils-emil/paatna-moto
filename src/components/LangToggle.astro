@@ -1,0 +1,55 @@
+---
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  altHref: string;
+}
+
+const { lang, altHref } = Astro.props;
+const altLabel = lang === 'et' ? 'EN' : 'ET';
+const currentLabel = lang === 'et' ? 'ET' : 'EN';
+---
+
+<a href={altHref} class="lang-toggle" aria-label={`Switch to ${altLabel}`}>
+  <span class="current">{currentLabel}</span>
+  <span class="sep">/</span>
+  <span class="alt">{altLabel}</span>
+</a>
+
+<style>
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 0.65rem;
+    border: 1px solid var(--border);
+    text-transform: uppercase;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .lang-toggle:hover {
+    color: var(--fg);
+    border-color: var(--accent);
+  }
+
+  .lang-toggle .current {
+    color: var(--fg);
+  }
+
+  .lang-toggle .sep {
+    color: var(--border);
+  }
+
+  .lang-toggle .alt {
+    color: var(--muted);
+  }
+
+  .lang-toggle:hover .alt {
+    color: var(--accent);
+  }
+</style>

@@ -1,0 +1,146 @@
+---
+import { riders, pick } from '../data/riders';
+import { t, localizedPath, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t(lang);
+---
+
+<section id="ratturid" class="riders">
+  <div class="container">
+    <h2 class="section-title">{s.riders.title}</h2>
+
+    <div class="grid">
+      {riders.map((rider) => (
+        <article class="card">
+          <h3>{rider.name}</h3>
+          {rider.intro && <p class="intro">{pick(rider.intro, lang)}</p>}
+          <p class="bike">
+            <a href={localizedPath(lang, `/masinad/${rider.bike.slug}/`)}>
+              {rider.bike.make} {rider.bike.model}
+              <span class="arrow">→</span>
+            </a>
+          </p>
+          {rider.previousBike && (
+            <p class="prev">
+              {s.riders.previously} {rider.previousBike.make} {rider.previousBike.model}
+              {rider.previousBike.note ? ` (${pick(rider.previousBike.note, lang)})` : ''}
+            </p>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .riders {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .section-title {
+    text-transform: none;
+    font-weight: 700;
+    letter-spacing: 0;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: 2.5rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .card {
+    padding: 1.75rem 1.5rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .card:last-child {
+    border-right: none;
+  }
+
+  h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 0.75rem;
+    color: var(--fg);
+  }
+
+  .intro {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  .bike {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .bike a {
+    color: var(--fg);
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .bike a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .bike .arrow {
+    color: var(--accent);
+    margin-left: 0.35rem;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .bike a:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  .prev {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .card:nth-child(2) {
+      border-right: none;
+    }
+    .card:nth-child(1), .card:nth-child(2) {
+      border-bottom: 1px solid var(--border);
+    }
+    .card:nth-child(3) {
+      border-right: 1px solid var(--border);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .card {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .card:last-child {
+      border-bottom: none;
+    }
+  }
+</style>
