@@ -21,7 +21,7 @@ const altPath = otherLangPath(lang, Astro.url.pathname);
 const altUrl = new URL(altPath, siteUrl).toString();
 const altLang: Lang = lang === 'et' ? 'en' : 'et';
 
-const defaultImage = '/og-default.png';
+const defaultImage = '/og-default.webp';
 const ogImageUrl = new URL(image ?? defaultImage, siteUrl).toString();
 const ogImageAlt = imageAlt ?? finalTitle;
 
