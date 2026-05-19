@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://paatna-motoklubi.pages.dev',
+  site: 'https://paatnamoto.ee',
   i18n: {
     defaultLocale: 'et',
     locales: ['et', 'en'],
@@ -9,6 +10,14 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'et',
+        locales: { et: 'et-EE', en: 'en' },
+      },
+    }),
+  ],
   build: {
     inlineStylesheets: 'auto',
   },

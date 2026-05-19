@@ -18,6 +18,12 @@ const title = `${trip.name[lang]} ${trip.year} · ${s.siteTitle}`;
 const altHref = `/en/reisid/${trip.slug}/`;
 ---
 
-<Layout title={title} description={trip.summary[lang]} lang={lang}>
+<Layout
+  title={title}
+  description={trip.summary[lang]}
+  lang={lang}
+  image={trip.hero}
+  imageAlt={`${trip.name[lang]} ${trip.year}`}
+>
   <TripDetail trip={trip} lang={lang} altHref={altHref} />
 </Layout>
