@@ -67,6 +67,10 @@ export const riders: Rider[] = [
   },
   {
     name: 'Kait',
+    intro: {
+      et: 'Sõidukogemus algas 1998. aastal, kui sain Nokia 2010 vastu Jawa 634. Praegune on juba kaheksas ratas.',
+      en: 'Riding experience started in 1998, when I traded a Nokia 2010 for a Jawa 634. Currently on my eighth bike.',
+    },
     bike: {
       make: 'BMW',
       model: 'GS 650',
