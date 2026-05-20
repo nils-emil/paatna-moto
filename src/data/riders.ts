@@ -37,6 +37,10 @@ export const riders: Rider[] = [
   },
   {
     name: 'Janis',
+    intro: {
+      et: 'Sõidukogemus algas 1989. aastal, kui vanaisa ostis mulle Riga 7 võrri.',
+      en: 'Riding experience started in 1989, when my grandfather bought me a Riga 7 moped.',
+    },
     bike: {
       make: 'BMW',
       model: 'R1200R',
