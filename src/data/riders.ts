@@ -6,6 +6,7 @@ export type Bike = {
   make: string;
   model: string;
   slug: string;
+  image?: string;
   type?: LocalizedString;
   engine?: LocalizedString;
   luggage?: LocalizedString;
@@ -31,8 +32,13 @@ export const riders: Rider[] = [
       make: 'BMW',
       model: 'F800ST',
       slug: 'bmw-f800st',
+      image: '/bikes/bmw-f800st-luggage.webp',
       type: { et: 'Sport tourer', en: 'Sport tourer' },
       engine: { et: '798 cm³ paralleel-twin', en: '798 cc parallel-twin' },
+      luggage: {
+        et: 'Esimesel aastal sõitsin kahe küljekohvri ja peale rihmatud suure dry bag’iga. Asjadeni jõudmine oli iga peatusega tüütu — rihmad maha, kott maha, ülemine ots lahti. Vahetasin top boxi vastu: kiirem ligipääs, kindlam vihma vastu ja kõrgem koormakeskpunkt ei sega enam sõitu.',
+        en: 'The first year I rode with two side cases and a large dry bag strapped on top. Getting at anything was a hassle at every stop — straps off, bag down, top open. Swapped it for a top box: faster access, better in the rain, and the load no longer sits high enough to upset the ride.',
+      },
     },
   },
   {

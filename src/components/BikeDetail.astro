@@ -54,6 +54,12 @@ const engineText = pick(bike.engine, lang);
 </header>
 
 <main class="container body">
+  {bike.image && (
+    <figure class="bike-photo">
+      <img src={bike.image} alt={`${bike.make} ${bike.model}`} loading="lazy" />
+    </figure>
+  )}
+
   <section class="block">
     <h2>{s.bikePage.ridingHeading}</h2>
     {ridingText
@@ -169,6 +175,19 @@ const engineText = pick(bike.engine, lang);
 
   .body {
     padding: 4rem 1.5rem 6rem;
+  }
+
+  .bike-photo {
+    margin: 0 0 3rem;
+    max-width: 720px;
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+  }
+
+  .bike-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .block {
