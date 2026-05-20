@@ -23,7 +23,7 @@ export const ui = {
       title: 'Klubi',
       body: 'Kui juba sõitma hakkasime, siis miks mitte kutsuda seda ka klubiks.',
       statusDone: 'Sõidetud',
-      statusNext: 'Sel suvel',
+      statusNext: 'Järgmine',
     },
     tripMap: {
       title: 'Reisid',
@@ -89,7 +89,7 @@ export const ui = {
       title: 'Club',
       body: 'If we were going to ride anyway, we might as well call it a club.',
       statusDone: 'Ridden',
-      statusNext: 'This summer',
+      statusNext: 'Next',
     },
     tripMap: {
       title: 'Trips',
