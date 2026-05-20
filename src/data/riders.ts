@@ -39,15 +39,15 @@ export const riders: Rider[] = [
     name: 'Janis',
     bike: {
       make: 'BMW',
-      model: 'R1200',
-      slug: 'bmw-r1200',
+      model: 'R1200R',
+      slug: 'bmw-r1200r',
       type: { et: 'Tourer', en: 'Tourer' },
       engine: { et: '1170 cm³ boxer', en: '1170 cc boxer' },
     },
     previousBike: {
       make: 'BMW',
-      model: 'R1100',
-      slug: 'bmw-r1100',
+      model: 'R1100S',
+      slug: 'bmw-r1100s',
       note: { et: 'kollane', en: 'yellow' },
     },
   },
@@ -72,8 +72,8 @@ export const riders: Rider[] = [
     },
     previousBike: {
       make: 'Honda',
-      model: 'Gold Wing',
-      slug: 'honda-gold-wing',
+      model: 'Pan European',
+      slug: 'honda-pan-european',
     },
   },
 ];
