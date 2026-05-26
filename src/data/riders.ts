@@ -14,9 +14,15 @@ export type Bike = {
   note?: LocalizedString;
 };
 
+export type RiderLink = {
+  label: LocalizedString;
+  url: string;
+};
+
 export type Rider = {
   name: string;
   intro?: LocalizedString;
+  links?: RiderLink[];
   bike: Bike;
   previousBike?: Bike;
 };
@@ -28,6 +34,12 @@ export const riders: Rider[] = [
       et: 'Sõitnud lapsest saati. Esimene masin oli sinine Riga 13 punnvõrr, 10-aastasena. Teine masin oli Loncin 150cc krossikas, 13-aastasena. A2 load said tehtud kohe 18-aastaselt. Seega sõidustaaži juba 20 aastat.',
       en: 'Riding since childhood. First bike was a blue Riga 13 moped at 10. Second was a Loncin 150cc dirt bike at 13. Got the A2 licence right at 18 — so 20 years in the saddle already.',
     },
+    links: [
+      {
+        label: { et: 'Ehitanud ka ühe chopperi', en: 'Also built a chopper' },
+        url: 'https://www.youtube.com/watch?v=XlDsOZIIzaI',
+      },
+    ],
     bike: {
       make: 'BMW',
       model: 'F800ST',

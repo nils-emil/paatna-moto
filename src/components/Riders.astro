@@ -21,6 +21,18 @@ const s = t(lang);
           {rider.intro && pick(rider.intro, lang)!.split(/\n\n+/).map((para) => (
             <p class="intro">{para}</p>
           ))}
+          {rider.links && (
+            <ul class="links">
+              {rider.links.map((link) => (
+                <li>
+                  <a href={link.url} target="_blank" rel="noopener">
+                    {pick(link.label, lang)}
+                    <span class="arrow">→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
           <p class="bike">
             <a href={localizedPath(lang, `/masinad/${rider.bike.slug}/`)}>
               {rider.bike.make} {rider.bike.model}
@@ -116,6 +128,38 @@ const s = t(lang);
   .prev {
     color: var(--muted);
     font-size: 0.85rem;
+  }
+
+  .links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .links a {
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .links a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .links .arrow {
+    color: var(--accent);
+    margin-left: 0.35rem;
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  .links a:hover .arrow {
+    transform: translateX(3px);
   }
 
   @media (max-width: 900px) {
