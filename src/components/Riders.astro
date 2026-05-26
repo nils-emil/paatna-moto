@@ -18,7 +18,9 @@ const s = t(lang);
       {riders.map((rider) => (
         <article class="card">
           <h3>{rider.name}</h3>
-          {rider.intro && <p class="intro">{pick(rider.intro, lang)}</p>}
+          {rider.intro && pick(rider.intro, lang)!.split(/\n\n+/).map((para) => (
+            <p class="intro">{para}</p>
+          ))}
           <p class="bike">
             <a href={localizedPath(lang, `/masinad/${rider.bike.slug}/`)}>
               {rider.bike.make} {rider.bike.model}

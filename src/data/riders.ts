@@ -63,6 +63,10 @@ export const riders: Rider[] = [
   },
   {
     name: 'Erik',
+    intro: {
+      et: 'Huvi mootorrataste vastu sai alguse umbes 14-aastaselt, kui sain vanaemalt esimese sõiduriista — vana mini mopeedi (Riga 49cc). Sellega sai külavahel palju sõidetud ja samal ajal ka remontimist õpitud, sest pidevalt vajas midagi putitamist.\n\n18-aastaselt sain vanaisalt mittetöötava Iž Jupiter 2 mootorratta, mille võtsin täielikult juppideks ja taastasin ise mitme kuu jooksul ära — uus värv, korrastatud elektrisüsteem ja palju praktilist kogemust. Selle rattaga sai mitu head suve sõidetud ja ka omajagu kukutud.\n\nPärast umbes 15-aastast pausi tegin 2017. aastal A-kategooria load. Seejärel olid mul Yamaha XVS 1100 ja Yamaha XJ900S, mille ehitasin ise ümber caferaceriks. Unistus Nordkapis ära käia viis mind lõpuks Honda XRV 750 Africa Twin juurde, millest on saanud minu lemmikratas ja millega olen kõige rohkem sõitnud. Ainuke asi, mis vahel närvidele käib, on selle kütusepump 🙂',
+      en: 'My interest in motorcycles started around age 14, when my grandmother gave me my first ride — an old mini moped (Riga 49cc). I racked up plenty of kilometres around the village on it and picked up wrenching at the same time, since something always needed fixing.\n\nAt 18 my grandfather handed me a non-running Iž Jupiter 2. I stripped it down completely and brought it back to life over a few months — new paint, sorted electrics and a lot of practical experience. That bike saw several good summers, and a fair share of crashes too.\n\nAfter roughly a 15-year break I got my A licence in 2017. Then came a Yamaha XVS 1100 and a Yamaha XJ900S that I converted into a café racer myself. The dream of riding to Nordkapp eventually led me to a Honda XRV 750 Africa Twin — it has become my favourite bike and the one I’ve ridden the most. The only thing that occasionally gets on my nerves is its fuel pump 🙂',
+    },
     bike: {
       make: 'Honda',
       model: 'Africa Twin XRV750',
