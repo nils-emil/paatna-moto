@@ -21,7 +21,7 @@ export const ui = {
     },
     about: {
       title: 'Klubi',
-      body: 'Kõik algas üsna spontaanselt — ühest ideest ja ühest suurest reisiplaanist. Erik oli just Honda Africa Twini koju toonud ja rääkis, et tahaks sellega Nordkappi sõita. Naabrid kuulasid pealt ja said sellest mõttest kohe kinni — neil oli loos rohkem elevust kui tervet mõistust.\n\nPoole tunniga oli plaan paigas: see teekond tuleb koos ette võtta. Janis ja Kait olid varem motomatkadel käinud, ja kuigi viimasest oli aastaid möödas, neid polnud vaja kaks korda küsida. Nils, seltskonna noorim, lõi koheselt käed — pikalt mõelda polnudki aega.\n\nNii sündiski Paatna Motoklubi. Meid ühendab mootorratas, pikk tee ja vaikne arusaam, et parimad reisid sünnivad sealt, kus neid liiga kaua ei planeerita.',
+      body: 'Klubi sai alguse Eriku Honda Africa Twinist ja plaanist sellega Nordkappi sõita. Naabrid kuulsid mõtet ja olid kohe asjas.\n\nPoole tunniga oli paigas: läheme koos. Janis ja Kait olid varem motomatkadel käinud, Nils on seltskonna noorim. Pikemalt mõelda polnud vaja.\n\nNii sündis Paatna Motoklubi. Mootorratas, pikk tee ja võimalikult vähe planeerimist.',
       statusDone: 'Sõidetud',
       statusNext: 'Järgmine',
     },
@@ -87,7 +87,7 @@ export const ui = {
     },
     about: {
       title: 'Club',
-      body: 'It all started pretty spontaneously — out of one idea and one big travel plan. Erik had just brought home a Honda Africa Twin and was talking about riding it up to Nordkapp. The neighbours were listening too, and they latched onto the idea right away — there was more excitement in it than common sense.\n\nWithin half an hour the plan was set: we’d ride it together. Janis and Kait had toured before, and even though it had been years since the last big trip, they didn’t need asking twice. Nils, the youngest of the bunch, was in on the spot — there wasn’t time for second thoughts.\n\nThat’s how Paatna Motoklubi got going. What holds us together is the bike, the long road, and the quiet sense that the best trips come from not planning them for too long.',
+      body: 'The club started with Erik’s Honda Africa Twin and a plan to ride it to Nordkapp. The neighbours heard about it and were in.\n\nHalf an hour later it was decided: we’d go together. Janis and Kait had toured before, Nils is the youngest of the bunch. No long discussions needed.\n\nThat’s how Paatna Motoklubi started. A bike, a long road, as little planning as possible.',
       statusDone: 'Ridden',
       statusNext: 'Next',
     },
