@@ -65,10 +65,10 @@ export const riders: Rider[] = [
     name: 'Erik',
     bike: {
       make: 'Honda',
-      model: 'Africa Twin',
-      slug: 'honda-africa-twin',
+      model: 'Africa Twin XRV750',
+      slug: 'honda-africa-twin-xrv750',
       type: { et: 'Adventure', en: 'Adventure' },
-      engine: { et: '1084 cm³ paralleel-twin', en: '1084 cc parallel-twin' },
+      engine: { et: '742 cm³ V-twin', en: '742 cc V-twin' },
     },
   },
   {
