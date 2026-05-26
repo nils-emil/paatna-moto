@@ -2,5 +2,6 @@
 
 ## Git workflow
 
-- Commit and push all changes directly to the `main` branch.
-- Do not create feature branches; work directly on `main`.
+- Work directly on the `main` branch. Do not create feature branches.
+- Commit freely as you go.
+- Only push when the user explicitly asks (e.g. "push", "lükka üles", "saada üles"). Do not push otherwise.
