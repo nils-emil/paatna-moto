@@ -20,7 +20,7 @@ const linkable: Record<string, string> = {
 
     <div class="grid">
       <div class="copy">
-        <p>{s.about.body}</p>
+        {s.about.body.split(/\n\n+/).map((para) => <p>{para}</p>)}
       </div>
 
       <div class="trips">
