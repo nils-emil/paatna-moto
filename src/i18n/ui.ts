@@ -21,7 +21,7 @@ export const ui = {
     },
     about: {
       title: 'Klubi',
-      body: 'Klubi sai alguse Eriku Honda Africa Twinist ja plaanist sõita sellega Nordkappi. Naabrid kuulsid plaani ja olid kohe nõus kaasa tulema.\n\nPoole tunniga oli otsus tehtud: läheme koos. Janisel ja Kaidil oli motomatkade kogemus olemas, kuigi viimasest oli aastaid möödas. Nils, seltskonna noorim, liitus samuti kohe.\n\nNii sündis Paatna Motoklubi. Meid ühendab mootorratas, pikk tee ja võimalikult vähe planeerimist.',
+      body: 'Meie klubi sündis ühest spontaansest ideest. Erik oli just ostnud endale Honda Africa Twini ja unistas sellega Nordkappi sõita. Kui ta naabritega sellest rääkis, tabas see mõte kõiki — ja tundus parajalt hullumeelne, et seda koos proovida.\n\nPool tundi hiljem oli otsus tehtud: läheme kõik koos.\n\nJanisel ja Kaidil oli motomatkade kogemus juba olemas, kuigi viimasest suuremast reisist oli mõni aasta möödas. Neid polnud vaja kaua veenda. Nils, meie noorim, ütles „jah“ kohe, kui kuulis — pikalt mõelda polnud aegagi.\n\nNii saigi alguse meie motoklubi. Meid seob armastus mootorrataste ja pikkade teede vastu ning üks lihtne tõdemus — parimad reisid on need, mida liiga kaua ette ei planeerita.',
       statusDone: 'Sõidetud',
       statusNext: 'Järgmine',
     },
@@ -87,7 +87,7 @@ export const ui = {
     },
     about: {
       title: 'Club',
-      body: 'The club started with Erik’s Honda Africa Twin and a plan to ride it to Nordkapp. The neighbours heard the plan and were in straight away.\n\nWithin half an hour the decision was made: we’d go together. Janis and Kait had toured before, though years had passed since the last big trip. Nils, the youngest of the bunch, was in just as quickly.\n\nThat’s how Paatna Motoklubi started. What holds us together is the bike, the long road, and as little planning as possible.',
+      body: 'Our club was born out of one spontaneous idea. Erik had just bought himself a Honda Africa Twin and dreamed of riding it to Nordkapp. When he told the neighbours about it, the idea caught everyone — and it seemed just crazy enough to try together.\n\nHalf an hour later the decision was made: we’d all go together.\n\nJanis and Kait already had touring experience, though a few years had passed since their last big trip. They didn’t need much convincing. Nils, our youngest, said “yes” the moment he heard — there wasn’t time to think it over.\n\nThat’s how our motorcycle club started. What binds us together is a love for bikes and long roads, and one simple truth — the best trips are the ones you don’t plan too far ahead.',
       statusDone: 'Ridden',
       statusNext: 'Next',
     },
