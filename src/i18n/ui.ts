@@ -21,7 +21,7 @@ export const ui = {
     },
     about: {
       title: 'Klubi',
-      body: 'Klubi sai alguse Eriku Honda Africa Twinist ja plaanist sellega Nordkappi sõita. Naabrid kuulsid mõtet ja olid kohe asjas.\n\nPoole tunniga oli paigas: läheme koos. Janis ja Kait olid varem motomatkadel käinud, Nils on seltskonna noorim. Pikemalt mõelda polnud vaja.\n\nNii sündis Paatna Motoklubi. Mootorratas, pikk tee ja võimalikult vähe planeerimist.',
+      body: 'Klubi sai alguse Eriku Honda Africa Twinist ja plaanist sõita sellega Nordkappi. Naabrid kuulsid plaani ja said sellest kohe kinni — rohkem elevust kui tervet mõistust.\n\nPoole tunniga oli otsus tehtud: läheme koos. Janisel ja Kaidil oli motomatkade kogemus olemas, kuigi viimasest oli aastaid möödas. Nils, seltskonna noorim, liitus samuti kohe.\n\nNii sündis Paatna Motoklubi. Meid ühendab mootorratas, pikk tee ja võimalikult vähe planeerimist.',
       statusDone: 'Sõidetud',
       statusNext: 'Järgmine',
     },
@@ -87,7 +87,7 @@ export const ui = {
     },
     about: {
       title: 'Club',
-      body: 'The club started with Erik’s Honda Africa Twin and a plan to ride it to Nordkapp. The neighbours heard about it and were in.\n\nHalf an hour later it was decided: we’d go together. Janis and Kait had toured before, Nils is the youngest of the bunch. No long discussions needed.\n\nThat’s how Paatna Motoklubi started. A bike, a long road, as little planning as possible.',
+      body: 'The club started with Erik’s Honda Africa Twin and a plan to ride it to Nordkapp. The neighbours heard the idea and were in straight away — more excitement than sense.\n\nWithin half an hour the decision was made: we’d go together. Janis and Kait had toured before, though years had passed since the last big trip. Nils, the youngest of the bunch, was in just as quickly.\n\nThat’s how Paatna Motoklubi started. What holds us together is the bike, the long road, and as little planning as possible.',
       statusDone: 'Ridden',
       statusNext: 'Next',
     },
