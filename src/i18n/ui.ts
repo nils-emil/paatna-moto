@@ -56,7 +56,6 @@ export const ui = {
     trip: {
       dayLabel: 'Päev',
       noDiary: 'Päevikut pole veel kirjutatud — tuleb hiljem.',
-      endNote: '4500 km. 10 päeva. Aitäh kõigile, kes kaasa elasid.',
     },
     bikePage: {
       ridingHeading: 'Kuidas sõita',
@@ -124,7 +123,6 @@ export const ui = {
     trip: {
       dayLabel: 'Day',
       noDiary: 'The diary hasn’t been written yet — coming later.',
-      endNote: '4500 km. 10 days. Thanks to everyone who followed along.',
     },
     bikePage: {
       ridingHeading: 'How it rides',

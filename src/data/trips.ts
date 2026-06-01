@@ -24,6 +24,7 @@ export type Trip = {
   waypoints: [number, number][];
   pinned: { name: LocalizedString; lat: number; lon: number; emphasis?: boolean }[];
   days: TripDay[];
+  endNote?: LocalizedString;
 };
 
 const NORDKAPP_WAYPOINTS: [number, number][] = [
@@ -291,6 +292,10 @@ const NORDKAPP: Trip = {
       ],
     },
   ],
+  endNote: {
+    et: '4500 km. 10 päeva. Aitäh kõigile, kes kaasa elasid.',
+    en: '4500 km. 10 days. Thanks to everyone who followed along.',
+  },
 };
 
 const DOLOMITES: Trip = {

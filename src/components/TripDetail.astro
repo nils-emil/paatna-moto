@@ -73,7 +73,7 @@ const dayLabel = s.trip.dayLabel;
     </ol>
   )}
 
-  {trip.days.length > 0 && <p class="end-note">{s.trip.endNote}</p>}
+  {trip.days.length > 0 && trip.endNote && <p class="end-note">{trip.endNote[lang]}</p>}
 </main>
 
 <div id="lightbox" class="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true">
