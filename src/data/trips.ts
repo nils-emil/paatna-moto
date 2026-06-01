@@ -383,8 +383,8 @@ const DOLOMITES: Trip = {
           en: 'The second half of the day brought a proper downpour. The bikes held up.',
         },
         {
-          et: 'Maanteelt maha sõites ei tulnud Nilsil enam käigud alla. Kahtlustasime, et eilne käikudega pidurdamine võis midagi ära lõhkuda. Seisma jäädes ja kontrollides selgus, et käigukangi mutter oli kiirteel lahti tulnud ja hoovastiku vahele lennanud. Polt läks käigukangi külge tagasi ja käigud töötavad jälle.',
-          en: 'Coming off the highway, Nils could no longer shift down. We suspected yesterday’s engine braking might have broken something. Once stopped and checking, it turned out the shift-lever bolt had worked loose on the motorway and flown into the linkage. The bolt went back onto the shift lever and the gears work again.',
+          et: 'Maanteelt maha sõites ei tulnud Nilsil enam käigud alla. Kahtlustasime, et eilne käikudega pidurdamine võis midagi ära lõhkuda. Seisma jäädes ja kontrollides selgus, et kondli plastiku polt oli kiirteel lahti tulnud ja hoovastiku vahele lennanud. Polt läks omale kohale tagasi ja käigud töötavad jälle.',
+          en: 'Coming off the highway, Nils could no longer shift down. We suspected yesterday’s engine braking might have broken something. Once stopped and checking, it turned out a plastic cowling bolt had worked loose on the motorway and flown into the linkage. The bolt went back into its hole and the gears work again.',
         },
         {
           et: 'Lõpetasime päeva Kielces — mäed juba paistavad.',
