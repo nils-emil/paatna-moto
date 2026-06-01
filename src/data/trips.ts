@@ -369,6 +369,35 @@ const DOLOMITES: Trip = {
         '/dolomiidid/day1/amort-amorti-ots.webp',
       ],
     },
+    {
+      number: '2',
+      title: { et: 'Kaunas → Kielce', en: 'Kaunas → Kielce' },
+      route: { et: 'Leedu · Poola', en: 'Lithuania · Poland' },
+      paragraphs: [
+        {
+          et: 'Proovisime Varssavist varuosasid leida, aga kohapeal polnud midagi olemas.',
+          en: 'Tried to find spare parts in Warsaw, but nothing was in stock locally.',
+        },
+        {
+          et: 'Teise poole päeva saime korraliku paduvihma kaela. Motikad tegid koostööd.',
+          en: 'The second half of the day brought a proper downpour. The bikes held up.',
+        },
+        {
+          et: 'Maanteelt maha sõites ei tulnud Nilsil enam käigud alla. Kahtlustasime, et eilne käikudega pidurdamine võis midagi ära lõhkuda. Seisma jäädes ja kontrollides selgus, et käigukangi mutter oli kiirteel lahti tulnud ja hoovastiku vahele lennanud. Polt läks käigukangi külge tagasi ja käigud töötavad jälle.',
+          en: 'Coming off the highway, Nils could no longer shift down. We suspected yesterday’s engine braking might have broken something. Once stopped and checking, it turned out the shift-lever bolt had worked loose on the motorway and flown into the linkage. The bolt went back onto the shift lever and the gears work again.',
+        },
+        {
+          et: 'Lõpetasime päeva Kielces — mäed juba paistavad.',
+          en: 'Ended the day in Kielce — the mountains are already in view.',
+        },
+      ],
+      images: [
+        '/dolomiidid/day2/varssavi-paevike.webp',
+        '/dolomiidid/day2/paduvihm-parklas.webp',
+        '/dolomiidid/day2/teeaares-paus.webp',
+        '/dolomiidid/day2/kaigukangi-polt.webp',
+      ],
+    },
   ],
 };
 
