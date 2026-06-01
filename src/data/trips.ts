@@ -15,7 +15,7 @@ export type Trip = {
   slug: string;
   year: number;
   name: LocalizedString;
-  status: 'done' | 'planned';
+  status: 'done' | 'ongoing' | 'planned';
   color: string;
   dashArray?: string;
   hero?: string;
@@ -294,7 +294,7 @@ const DOLOMITES: Trip = {
   slug: 'dolomiidid-2026',
   year: 2026,
   name: { et: 'Dolomiidid', en: 'Dolomites' },
-  status: 'planned',
+  status: 'ongoing',
   color: '#f5f5f5',
   dashArray: '8 8',
   hero: '/dolomiidid/day1/paatna-start-grupp.webp',

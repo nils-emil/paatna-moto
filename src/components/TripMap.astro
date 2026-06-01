@@ -11,6 +11,7 @@ const s = t(lang);
 
 const tripLinks: Record<string, string> = {
   'nordkapp-2025': '/reisid/nordkapp-2025/',
+  'dolomiidid-2026': '/reisid/dolomiidid-2026/',
 };
 
 const mapTrips = trips.map((trip) => ({
@@ -50,8 +51,10 @@ const dolomites = trips.find((t) => t.slug === 'dolomiidid-2026')!;
         <span><strong>{nordkapp.year}</strong> {nordkapp.name[lang]} · {s.tripMap.legendDone}</span>
       </li>
       <li>
-        <span class="swatch planned"></span>
-        <span><strong>{dolomites.year}</strong> {dolomites.name[lang]} · {s.tripMap.legendPlanned}</span>
+        <span class={`swatch ${dolomites.status === 'ongoing' ? 'ongoing' : 'planned'}`}></span>
+        <span>
+          <strong>{dolomites.year}</strong> {dolomites.name[lang]} · {dolomites.status === 'ongoing' ? s.tripMap.legendOngoing : s.tripMap.legendPlanned}
+        </span>
       </li>
     </ul>
   </div>
@@ -64,7 +67,7 @@ const dolomites = trips.find((t) => t.slug === 'dolomiidid-2026')!;
   type Trip = {
     year: number;
     name: string;
-    status: 'done' | 'planned';
+    status: 'done' | 'ongoing' | 'planned';
     color: string;
     dashArray?: string;
     waypoints: [number, number][];
@@ -107,9 +110,9 @@ const dolomites = trips.find((t) => t.slug === 'dolomiidid-2026')!;
     trips.forEach((trip) => {
       const line = L.polyline(trip.waypoints, {
         color: trip.color,
-        weight: trip.status === 'done' ? 3.5 : 2.5,
-        opacity: trip.status === 'done' ? 1 : 0.9,
-        dashArray: trip.dashArray,
+        weight: trip.status === 'planned' ? 2.5 : 3.5,
+        opacity: trip.status === 'planned' ? 0.9 : 1,
+        dashArray: trip.status === 'planned' ? trip.dashArray : undefined,
         lineCap: 'round',
         lineJoin: 'round',
         className: trip.href ? 'paatna-route-link' : '',
@@ -295,5 +298,15 @@ const dolomites = trips.find((t) => t.slug === 'dolomiidid-2026')!;
 
   .swatch.planned {
     background: repeating-linear-gradient(to right, #f5f5f5 0 6px, transparent 6px 14px);
+  }
+
+  .swatch.ongoing {
+    background: #f5f5f5;
+    animation: swatch-pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes swatch-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
   }
 </style>

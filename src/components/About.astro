@@ -35,8 +35,12 @@ const linkable: Record<string, string> = {
                 {trip.name[lang]}
                 {href && <span class="arrow">→</span>}
               </span>
-              <span class={`status status-${trip.status === 'done' ? 'done' : 'next'}`}>
-                {trip.status === 'done' ? s.about.statusDone : s.about.statusNext}
+              <span class={`status status-${trip.status === 'done' ? 'done' : trip.status === 'ongoing' ? 'ongoing' : 'next'}`}>
+                {trip.status === 'done'
+                  ? s.about.statusDone
+                  : trip.status === 'ongoing'
+                  ? s.about.statusOngoing
+                  : s.about.statusNext}
               </span>
             </>
           );
@@ -139,6 +143,29 @@ const linkable: Record<string, string> = {
 
   .status-done {
     color: var(--muted);
+  }
+
+  .status-ongoing {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(255, 77, 0, 0.08);
+  }
+
+  .status-ongoing::before {
+    content: '';
+    display: inline-block;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 0.45rem;
+    vertical-align: 0.05rem;
+    animation: status-pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes status-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
   }
 
   .status-next {
