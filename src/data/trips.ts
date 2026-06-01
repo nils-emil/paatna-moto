@@ -297,6 +297,7 @@ const DOLOMITES: Trip = {
   status: 'planned',
   color: '#f5f5f5',
   dashArray: '8 8',
+  hero: '/dolomiidid/day1/paatna-start-grupp.webp',
   summary: {
     et: 'Suvel 2026. Paatnast lõunasse — läbi Tatralandia, Alpine Coaster Imsti, Bormio ja Bolzano Dolomiitidesse, tagasi üle Grossglockneri, Müncheni ja České Budějovice.',
     en: 'Summer 2026. From Paatna south — via Tatralandia, Alpine Coaster Imst, Bormio and Bolzano to the Dolomites, returning over Grossglockner, Munich and České Budějovice.',
@@ -327,7 +328,40 @@ const DOLOMITES: Trip = {
     { name: { et: 'München', en: 'Munich' }, lat: 48.1768304, lon: 11.5590966 },
     { name: { et: 'České Budějovice', en: 'České Budějovice' }, lat: 48.9756578, lon: 14.480255 },
   ],
-  days: [],
+  days: [
+    {
+      number: '1',
+      title: { et: 'Paatna → Kaunas', en: 'Paatna → Kaunas' },
+      route: { et: 'Eesti · Läti · Leedu', en: 'Estonia · Latvia · Lithuania' },
+      paragraphs: [
+        {
+          et: 'Hommik algas plaanipäraselt — või õigemini, mitte päris. Janisel olid veel viimased „väikesed“ tööd lõpetamata: näiteks LED-tulede paigaldus. Kes siis ikka pooleliolva projektiga reisile läheb.',
+          en: 'The morning started on schedule — or rather, not quite. Janis still had a few "small" jobs left to finish, like installing his LED lights. Who would set off on a trip with an unfinished project, after all.',
+        },
+        {
+          et: 'Esimene peatus juba Laeva tanklas — paagid ja kõhud täidetud. Edasi Võru poole, aga enne piiri tuli ilmsiks, et Kaiti ratta küljetugi vajab hädasti laiendust. Lahendus leiti Võru Magazinist — mingi suvaline kummikork, mis insenertehnilise mõtte abil muutus täiesti toimivaks lisavarustuseks. Kui töötab, siis töötab.',
+          en: 'First stop already at the Laeva petrol station — tanks and bellies filled. On toward Võru, but before the border it turned out Kait’s side stand urgently needed widening. The fix came from a hardware shop in Võru — some random rubber cap that, with a bit of engineering thinking, became perfectly functional kit. If it works, it works.',
+        },
+        {
+          et: 'Üle Läti naabrite juurde. Mõned tankimised, kilomeetrid kulusid ja läti keel hakkas peaaegu külge. Eestis ja Leedus pani politsei mõlemal pool ka puhuma — kõik puhtad.',
+          en: 'Over to the Latvian neighbours. A few refuels, kilometres rolled past and Latvian almost started to stick. The police breathalysed us on both the Estonian and the Lithuanian sides — all clean.',
+        },
+        {
+          et: 'Siis Leetu. Ja Leedu teed otsustasid, et reis on seni olnud liiga igav. Ühel hetkel teatab Janis rahulikult: „Kuulge, mul tagumise ratta juurest natuke õline...“ Lähem uurimine näitas, et tagumine amort otsustas pensionile jääda ja oma sisu Leedu pinnasega jagada. Loomulikult kontrollis kogu seltskond kohe oma rattaid, et ega nakkav pole.',
+          en: 'Then into Lithuania. The Lithuanian roads decided our trip had been too boring so far. At some point Janis calmly announces: "Hey, things look a bit oily near my rear wheel..." A closer look showed that the rear shock had decided to retire and share its contents with the Lithuanian soil. Naturally the whole group checked their own bikes straight away to make sure it wasn’t contagious.',
+        },
+        {
+          et: 'Esimene päev kulges aeglaselt — aga Kaunas käes.',
+          en: 'The first day went slowly — but Kaunas was reached.',
+        },
+      ],
+      images: [
+        '/dolomiidid/day1/paatna-start-grupp.webp',
+        '/dolomiidid/day1/hesburger-leedu.webp',
+        '/dolomiidid/day1/amort-amorti-ots.webp',
+      ],
+    },
+  ],
 };
 
 export const trips: Trip[] = [NORDKAPP, DOLOMITES];
