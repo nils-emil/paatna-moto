@@ -335,16 +335,28 @@ const DOLOMITES: Trip = {
       route: { et: 'Eesti · Läti · Leedu', en: 'Estonia · Latvia · Lithuania' },
       paragraphs: [
         {
-          et: 'Hommik algas plaanipäraselt — või õigemini, mitte päris. Janisel olid veel viimased „väikesed“ tööd lõpetamata, näiteks LED-tulede paigaldus, sest kes nüüd pooleliolva projektiga reisile läheb. Esimene peatus juba Laeva tanklas — paagid ja kõhud täidetud — ja edasi Võru poole, aga enne piirini jõudmist selgus, et Kaiti ratta küljetugi vajab hädasti laiendust. Lahendus leiti Võru Magazinist: mingi suvaline kummikork, mis insenertehnilise mõtte abil muutus täiesti toimivaks lisavarustuseks. Kui töötab, siis töötab.',
-          en: 'The morning started on schedule — or rather, not quite. Janis still had a few "small" jobs left, like installing his LED lights, because who would set off with an unfinished project. First stop already at the Laeva petrol station — tanks and bellies filled — then on toward Võru, but before the border it turned out Kait’s side stand urgently needed widening. The fix came from a hardware shop in Võru: some random rubber cap that, with a bit of engineering thinking, became perfectly functional kit. If it works, it works.',
+          et: 'Hommik algas stardiga — Janis pani veel kiiresti LED-tulede paigalduse valmis ja siis saime teele.',
+          en: 'The morning started with the off — Janis quickly finished installing his LED lights and then we got going.',
         },
         {
-          et: 'Üle Läti naabrite juurde — mõned tankimised, kilomeetrid kulusid ja läti keel hakkas peaaegu külge. Eestis ja Leedus pani politsei mõlemal pool ka puhuma, aga kõik puhtad.',
-          en: 'Over to the Latvian neighbours — a few refuels, kilometres rolled past and Latvian almost started to stick. The police breathalysed us on both the Estonian and the Lithuanian sides, but everyone was clean.',
+          et: 'Laeva tanklas paagid täis, kõhud ka. Enne Läti piiri selgus, et Kaiti ratta küljetugi vajab laiendust — Võru Magazinist leitud kummikork tegi töö ära.',
+          en: 'At the Laeva petrol station, tanks filled and bellies too. Before the Latvian border it turned out Kait’s side stand needed widening — a rubber cap from the Võru hardware shop did the job.',
         },
         {
-          et: 'Siis Leetu, ja Leedu teed otsustasid, et reis on seni olnud liiga igav. Ühel hetkel teatab Janis rahulikult: „Kuulge, mul tagumise ratta juurest natuke õline...“ Lähem uurimine näitas, et tagumine amort on otsustanud pensionile jääda ja oma sisu Leedu pinnasega jagada. Loomulikult kontrollis kogu seltskond kohe oma rattaid, et ega nakkav pole. Esimene päev kulges aeglaselt — aga Kaunas käes.',
-          en: 'Then into Lithuania, and the Lithuanian roads decided our trip had been too boring so far. At some point Janis calmly announces: "Hey, things look a bit oily near my rear wheel..." A closer look showed the rear shock had decided to retire and share its contents with the Lithuanian soil. Naturally the whole group checked their own bikes straight away to make sure it wasn’t contagious. The first day went slowly — but Kaunas was reached.',
+          et: 'Läti läbisime kiirelt, politsei puhutas mõlemal pool piiri, kõik puhtad.',
+          en: 'We crossed Latvia quickly; the police breathalysed us on both sides of the border, everyone clean.',
+        },
+        {
+          et: 'Leedus otsustas Janise tagumine amort pensionile jääda ja lekib õli. Kõik kontrollisid kohe oma rattaid.',
+          en: 'In Lithuania Janis’s rear shock decided to retire and started leaking oil. Everyone checked their own bikes straight away.',
+        },
+        {
+          et: 'Nils avastas, et tagumised piduriklotsid on otsas. Hakkas käiguga pidurdama — selgus, et kombineeritud pidurit pole niikuinii ja esipidur ajab asja ära.',
+          en: 'Nils discovered his rear brake pads were finished. Started engine braking — turned out there’s no linked brake system anyway, and the front brake does the job.',
+        },
+        {
+          et: 'Esimene päev kirju, aga Kaunas on käes.',
+          en: 'A colourful first day, but Kaunas is reached.',
         },
       ],
       images: [
