@@ -25,11 +25,19 @@ const mapTrips = trips.map((trip) => ({
   tooltipOpen: s.tripMap.tooltipOpen,
 }));
 
-const markers = trips.flatMap((trip) =>
-  trip.pinned
-    .filter((p) => p.emphasis)
-    .map((p) => ({ name: p.name[lang], lat: p.lat, lon: p.lon, color: trip.color }))
-);
+const markers = (() => {
+  const seen = new Map<string, { name: string; lat: number; lon: number; color: string }>();
+  for (const trip of trips) {
+    for (const p of trip.pinned) {
+      if (!p.emphasis) continue;
+      const key = `${p.lat.toFixed(3)},${p.lon.toFixed(3)}`;
+      if (!seen.has(key)) {
+        seen.set(key, { name: p.name[lang], lat: p.lat, lon: p.lon, color: trip.color });
+      }
+    }
+  }
+  return Array.from(seen.values());
+})();
 
 const tripsJson = JSON.stringify(mapTrips);
 const markersJson = JSON.stringify(markers);

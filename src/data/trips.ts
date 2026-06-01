@@ -27,6 +27,7 @@ export type Trip = {
 };
 
 const NORDKAPP_WAYPOINTS: [number, number][] = [
+  [59.3686, 26.2918],
   [59.44, 24.75],
   [60.17, 24.94],
   [62.24, 25.75],
@@ -42,6 +43,7 @@ const NORDKAPP_WAYPOINTS: [number, number][] = [
   [61.65, 17.07],
   [59.32, 18.07],
   [59.44, 24.75],
+  [59.3686, 26.2918],
 ];
 
 const NORDKAPP: Trip = {
@@ -63,7 +65,8 @@ const NORDKAPP: Trip = {
   ],
   waypoints: NORDKAPP_WAYPOINTS,
   pinned: [
-    { name: { et: 'Tallinn', en: 'Tallinn' }, lat: 59.44, lon: 24.75, emphasis: true },
+    { name: { et: 'Paatna', en: 'Paatna' }, lat: 59.3686, lon: 26.2918, emphasis: true },
+    { name: { et: 'Tallinn', en: 'Tallinn' }, lat: 59.44, lon: 24.75 },
     { name: { et: 'Rovaniemi', en: 'Rovaniemi' }, lat: 66.50, lon: 25.72 },
     { name: { et: 'Nordkapp', en: 'Nordkapp' }, lat: 71.17, lon: 25.78, emphasis: true },
     { name: { et: 'Alta', en: 'Alta' }, lat: 69.97, lon: 23.27 },
@@ -308,6 +311,9 @@ const DOLOMITES: Trip = {
   ],
   waypoints: [
     [59.3686299, 26.291809],
+    [54.8985, 23.9036],
+    [52.2297, 21.0122],
+    [50.8661, 20.6286],
     [49.1067428, 19.5699039],
     [47.2419594, 10.72172],
     [46.6879278, 10.5396283],
@@ -320,6 +326,9 @@ const DOLOMITES: Trip = {
   ],
   pinned: [
     { name: { et: 'Paatna', en: 'Paatna' }, lat: 59.3686299, lon: 26.291809, emphasis: true },
+    { name: { et: 'Kaunas', en: 'Kaunas' }, lat: 54.8985, lon: 23.9036, emphasis: true },
+    { name: { et: 'Varssavi', en: 'Warsaw' }, lat: 52.2297, lon: 21.0122, emphasis: true },
+    { name: { et: 'Kielce', en: 'Kielce' }, lat: 50.8661, lon: 20.6286, emphasis: true },
     { name: { et: 'Tatralandia', en: 'Tatralandia' }, lat: 49.1067428, lon: 19.5699039 },
     { name: { et: 'Imst', en: 'Imst' }, lat: 47.2419594, lon: 10.72172 },
     { name: { et: 'Bormio', en: 'Bormio' }, lat: 46.4685313, lon: 10.371804 },
