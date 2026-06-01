@@ -358,6 +358,10 @@ const DOLOMITES: Trip = {
           et: 'Esimene päev kirju, aga Kaunas on käes.',
           en: 'A colourful first day, but Kaunas is reached.',
         },
+        {
+          et: 'Ööbisime telkimisplatsil — 17 € öö inimese pealt, hinnas pesula, WC ja telkimisala.',
+          en: 'Spent the night at a campsite — €17 per person, with laundry, toilets and the pitch included.',
+        },
       ],
       images: [
         '/dolomiidid/day1/paatna-start-grupp.webp',
