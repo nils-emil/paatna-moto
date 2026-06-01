@@ -395,7 +395,7 @@ const DOLOMITES: Trip = {
         '/dolomiidid/day2/varssavi-paevike.webp',
         '/dolomiidid/day2/paduvihm-parklas.webp',
         '/dolomiidid/day2/teeaares-paus.webp',
-        '/dolomiidid/day2/kaigukangi-polt.webp',
+        '/dolomiidid/day2/kondli-polt.webp',
       ],
     },
   ],
